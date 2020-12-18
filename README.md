@@ -1,5 +1,5 @@
 # LiveviewGithub
-Liveview Component for streaming liveview repositories
+Liveview Component for streaming github repositories in realtime
 
 ## Setting up the Application
   * start the terminal
