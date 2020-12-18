@@ -1,0 +1,62 @@
+<main role="main">
+  <p class="alert alert-info" role="alert"
+    phx-click="lv:clear-flash"
+    phx-value-key="info"><%= live_flash(@flash, :info) %></p>
+
+  <p class="alert alert-danger" role="alert"
+    phx-click="lv:clear-flash"
+    phx-value-key="error"><%= live_flash(@flash, :error) %></p>
+
+
+  <div class="container">
+    <div>
+      <div class="column"></div>
+      <div class="column is-half is-offset-one-quarter">
+        <div class="block has-text-centered">
+          <img class="image" src="images/logo_main.png" />
+        </div>
+
+        <div class="block has-text-centered is-centered">
+          <div class="column is-half is-offset-one-quarter">
+            <%= f = form_for :data, "#", phx_change: "find", phx_submit: "fetch", as: "repo" %>
+              <div class="field is-centered">
+                <div class="control">
+                  <%= text_input f, :name, class: "input", id: "search-input-autocomplete" , placeholder: "Live Search GitHub Repositories", autocomplete: "on" %>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="card has-background-black">
+            <div class="card-content">
+              <section id="simpleList block" class="simpleList">
+                <article class="stackedListWrapper stackedListWrapper--hasScrollIndicator">
+                  <h3 class="title is-4 has-text-white">Simple list</h3>
+
+                  <ul class="stackedList stackedList--hasScroll" id="scrollabe-main" phx-hook="ScrollableObserver" tabindex="0">
+                    <%= for content <- @results do %>
+                      <li class="draggable-source box" tabindex="1">
+                        <div class="level">
+                          <div class="level-left">
+                            <p class="level-item"><strong><%= content %></strong></p>
+                          </div>
+                          <div class="level-right">
+                            <p class="level-item"><i class="fas fa-bars"></i></p>
+                          </div>
+                        </div>
+                      </li>
+                    <% end %>
+                  <ul>
+                </article>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column"></div>
+    </div>
+  </div>
+</main>
