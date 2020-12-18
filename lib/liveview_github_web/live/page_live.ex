@@ -18,8 +18,8 @@ defmodule LiveviewGithubWeb.PageLive do
       {:noreply, assign(socket, :count, count + 1)}
     else
       case LiveviewGithub.Github.Search.repository_search(name) do
-        {:error, _message} ->
-          {:noreply, socket}
+        {:error, message} ->
+          {:noreply, put_flash(socket, :error, message)}
 
         {:ok, results} ->
           {:noreply, assign(socket, results: results, data: results)}
@@ -29,8 +29,8 @@ defmodule LiveviewGithubWeb.PageLive do
 
   def handle_event("fetch", %{"data" => %{"name" => name}}, socket) do
     case LiveviewGithub.Github.Search.repository_search(name) do
-      {:error, _message} ->
-        {:noreply, socket}
+      {:error, message} ->
+        {:noreply, put_flash(socket, :error, message)}
 
       {:ok, results} ->
         {:noreply, assign(socket, results: results, data: results)}
